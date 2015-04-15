@@ -1,0 +1,5 @@
+*vcxproj*
+CMakeCache.txt
+CMakeFiles
+*.sln
+cmake_install.cmake
