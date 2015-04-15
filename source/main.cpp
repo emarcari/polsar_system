@@ -15,8 +15,8 @@ int main( int argc, char* argv[] ) {
     TerraLib::getInstance().initialize();
     std::cout << " done" << std::endl;
 
-    run_numerical_tests();
-    run_terralib_tests();
+    // do the job
+
     
     std::cout << "Closing Terralib...";
     TerraLib::getInstance().finalize();

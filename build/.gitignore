@@ -1,5 +1,8 @@
+Win32
+Debug
+PolsarSystem*
 *vcxproj*
+*.sln
 CMakeCache.txt
 CMakeFiles
-*.sln
 cmake_install.cmake
