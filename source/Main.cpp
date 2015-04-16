@@ -9,15 +9,34 @@
 // TerraLib
 #include <common.h>
 
+// Local
+#include "LoadModules.h"
+
 int main( int argc, char* argv[] ) {
   try {
+    // load terralib
     std::cout << "Loading Terralib...";
     TerraLib::getInstance().initialize();
     std::cout << " done" << std::endl;
 
+    // load modules
+    LoadModules();
+
     // do the job
 
-    
+
+
+    /*
+    std::map<std::string, std::string> inputRasterInfo;
+    inputRasterInfo["URI"] = TERRALIB_DATA_DIR "/rasters/cbers2b_rgb342_crop.tif";
+
+    boost::shared_ptr< te::rst::Raster > inputRasterPointer ( te::rst::RasterFactory::open(
+											   inputRasterInfo ) );
+    CPPUNIT_ASSERT( inputRasterPointer.get() );
+    */
+
+
+    // close terralib
     std::cout << "Closing Terralib...";
     TerraLib::getInstance().finalize();
     std::cout << " done" << std::endl;
