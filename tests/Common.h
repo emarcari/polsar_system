@@ -6,11 +6,6 @@
   \author Etore Marcari Jr. <etore@dpi.inpe.br>
 */
 
-/**
- * Simple common include file 
- */
-
-
 // STD
 #include <complex>
 

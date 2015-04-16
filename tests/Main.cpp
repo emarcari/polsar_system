@@ -7,8 +7,8 @@
 */
 
 // Local
-#include "numerical_tests.h"
-#include "terralib_tests.h"
+#include "NumericalTests.h"
+#include "TerralibTests.h"
 
 // TerraLib
 #include <common.h>
