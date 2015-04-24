@@ -6,11 +6,17 @@
   \author Etore Marcari Jr. <etore@dpi.inpe.br>
 */
 
+// Local
+#include "terralib/RadarFunctions.h"
+
+#include "LoadModules.h"
+#include "Util.h"
+
 // TerraLib
 #include <common.h>
 
-// Local
-#include "LoadModules.h"
+// Boost
+#include <boost/shared_ptr.hpp>
 
 int main( int argc, char* argv[] ) {
   try {
@@ -22,18 +28,11 @@ int main( int argc, char* argv[] ) {
     // load modules
     LoadModules();
 
-    // do the job
+    std::vector<std::pair<te::rst::Raster*,size_t>>
+      raster_info = polsarsystem::util::extractRastersFromArgs(argc, argv);
 
-
-
-    /*
-    std::map<std::string, std::string> inputRasterInfo;
-    inputRasterInfo["URI"] = TERRALIB_DATA_DIR "/rasters/cbers2b_rgb342_crop.tif";
-
-    boost::shared_ptr< te::rst::Raster > inputRasterPointer ( te::rst::RasterFactory::open(
-											   inputRasterInfo ) );
-    CPPUNIT_ASSERT( inputRasterPointer.get() );
-    */
+    std::string outputPrefix =
+      polsarsystem::util::extractOutputPrefixFromArgs(argc, argv);
 
 
     // close terralib
