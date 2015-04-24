@@ -23,7 +23,7 @@ namespace polsarsystem {
       \return Converted string.
      */
     template<class T>
-      std::string toString(const T& t) {
+      std::string toString( const T& t ) {
       std::ostringstream ss;
       ss << t;
       return ss.str();
@@ -36,8 +36,8 @@ namespace polsarsystem {
       \param s Converted string.
      */
     template<class T>
-      void toString(const T& t, const std::string& s) {
-      t = toString<T>(s);
+      void toString( const T& t, const std::string& s ) {
+      t = toString<T>( s );
     }
     
     /*!
@@ -48,8 +48,8 @@ namespace polsarsystem {
       \return Converted value.
      */
     template<class T>
-      T fromString(const std::string& s) {
-      std::istringstream ss(s);
+      T fromString( const std::string& s ) {
+      std::istringstream ss( s );
       T t = T(); // set only to avoid valgrind error message
       ss >> t;
       return t;
@@ -62,8 +62,8 @@ namespace polsarsystem {
       \param s String to be converted.
      */
     template<class T>
-      void fromString(T& t, const std::string& s) {
-      t = fromString<T>(s);
+      void fromString( T& t, const std::string& s ) {
+      t = fromString<T>( s );
     }
 
     /*!
@@ -80,7 +80,7 @@ namespace polsarsystem {
       \return A vector of pair<raster*,band_number>.
      */
     std::vector<std::pair<te::rst::Raster*,size_t>>
-      extractRastersFromArgs(int argc, char* argv[]);
+      extractRastersFromArgs( int argc, char* argv[] );
 
     /*!
       \brief Given an argc/argv pair, it extracts the output prefix.
@@ -95,7 +95,7 @@ namespace polsarsystem {
       
       \return The output prefix.
      */
-    std::string extractOutputPrefixFromArgs(int argc, char* argv[]);
+    std::string extractOutputPrefixFromArgs( int argc, char* argv[] );
 
     
   } // end namespace polsarsystem

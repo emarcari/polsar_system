@@ -29,11 +29,16 @@ int main( int argc, char* argv[] ) {
     LoadModules();
 
     std::vector<std::pair<te::rst::Raster*,size_t>>
-      raster_info = polsarsystem::util::extractRastersFromArgs(argc, argv);
+      raster_info = polsarsystem::util::extractRastersFromArgs( argc, argv );
 
     std::string outputPrefix =
-      polsarsystem::util::extractOutputPrefixFromArgs(argc, argv);
+      polsarsystem::util::extractOutputPrefixFromArgs( argc, argv );
 
+    
+
+
+
+    
 
     // close terralib
     std::cout << "Closing Terralib...";
