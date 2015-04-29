@@ -28,18 +28,37 @@ int main( int argc, char* argv[] ) {
     // load modules
     LoadModules();
 
+    // @todo - etore - Change it to extract raster and bands as reference
     std::vector<std::pair<te::rst::Raster*,size_t>>
-      raster_info = polsarsystem::util::extractRastersFromArgs( argc, argv );
+      rasterInfo = polsarsystem::util::extractRastersFromArgs( argc, argv );
 
     std::string outputPrefix =
       polsarsystem::util::extractOutputPrefixFromArgs( argc, argv );
 
+    std::vector<te::rst::Raster*> inputRasters;
+    std::vector<size_t> inputBands;
+
+    for( size_t i = 0; i < rasterInfo.size(); ++i ) {
+      inputRasters.push_back( rasterInfo[i].first );
+      inputBands.push_back( rasterInfo[i].second );
+    }
+
+    std::map<std::string, std::string> outRasterInfo;
+    outRasterInfo["URI"] = outputPrefix;
+
+    std::auto_ptr< te::rst::Raster > outDiskRasterPtr;    
+
+    bool result = te::rp::radar::CreateCovarianceRaster( inputRasters, inputBands, 
+							 outRasterInfo,
+							 "GDAL", outDiskRasterPtr );
     
-
-
-
     
-
+    if( result ) {
+      std::cout << "processing ok" << std::endl;
+    } else {
+      std::cout << "error in processing" << std::endl;
+    }
+    
     // close terralib
     std::cout << "Closing Terralib...";
     TerraLib::getInstance().finalize();
