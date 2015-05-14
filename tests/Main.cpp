@@ -7,8 +7,10 @@
 */
 
 // Local
+#include "LoadModules.h"
+#include "MultiResolutionTests.h"
 #include "NumericalTests.h"
-#include "TerralibTests.h"
+#include "TerralibMathTests.h"
 
 // TerraLib
 #include <common.h>
@@ -17,15 +19,16 @@ int main( int argc, char* argv[] ) {
   try {
     std::cout << "Loading Terralib...";
     TerraLib::getInstance().initialize();
+    LoadModules();
     std::cout << " done" << std::endl;
 
+    run_multiresolution_tests();
     run_numerical_tests();
-    run_terralib_tests();
-    
+    run_terralib_math_tests();
+
     std::cout << "Closing Terralib...";
     TerraLib::getInstance().finalize();
     std::cout << " done" << std::endl;
-
 
     system("pause");
 
