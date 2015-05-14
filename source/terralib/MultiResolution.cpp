@@ -106,7 +106,7 @@ namespace te {
 	      size_t rowToRead = rr;
 
 	      if( colToRead < srcCols && rowToRead < srcRows ) {
-		srcRaster.getValue( cr, rr, value, b );
+		srcRaster.getValue( colToRead, rowToRead, value, b );
 		mean += value;
 		++pixelCount;
 	      }
@@ -114,7 +114,7 @@ namespace te {
 	      rowToRead = rr + 1;
 
 	      if( colToRead < srcCols && rowToRead < srcRows ) {
-		srcRaster.getValue( cr, rr, value, b );
+		srcRaster.getValue( colToRead, rowToRead, value, b );
 		mean += value;
 		++pixelCount;
 	      }
@@ -122,7 +122,7 @@ namespace te {
 	      colToRead = cr + 1;
 
 	      if( colToRead < srcCols && rowToRead < srcRows ) {
-		srcRaster.getValue( cr, rr, value, b );
+		srcRaster.getValue( colToRead, rowToRead, value, b );
 		mean += value;
 		++pixelCount;
 	      }
@@ -130,7 +130,7 @@ namespace te {
 	      rowToRead = rr;
 
 	      if( colToRead < srcCols && rowToRead < srcRows ) {
-		srcRaster.getValue( cr, rr, value, b );
+		srcRaster.getValue( colToRead, rowToRead, value, b );
 		mean += value;
 		++pixelCount;
 	      }
@@ -141,7 +141,6 @@ namespace te {
 	      }
 
 	      mean /= (double)pixelCount;
-	      
 	      dstRaster.setValue( c, r, mean, b );
 	    }
 	  }
