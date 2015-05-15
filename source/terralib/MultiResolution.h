@@ -47,7 +47,8 @@ namespace te {
 	  \brief Constructor.
 
 	  \param inputRaster Input raster.
-	  \param levels Number of levels to be created in the multi resolution.
+	  \param levels Number of levels to be created in the multi resolution,
+	                plus the level 0.
 	  \param enableProgressInterface Enable/disable the use of a progress.
 	*/
 	MultiResolution( const te::rst::Raster& inputRaster, size_t levels,
@@ -58,6 +59,7 @@ namespace te {
 
 	  \param inputRaster Input raster.
 	  \param levels Number of levels in the multi resolution.
+	                plus the level 0.
 	  \param bandsNumbers Numbers of bands to be used when computing stats.
 	  \param enableProgressInterface Enable/disable the use of a progress.
 	*/
