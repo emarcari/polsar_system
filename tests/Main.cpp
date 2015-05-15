@@ -10,6 +10,7 @@
 #include "LoadModules.h"
 #include "MultiResolutionTests.h"
 #include "NumericalTests.h"
+#include "RadarFunctionsTests.h"
 #include "TerralibMathTests.h"
 
 // TerraLib
@@ -24,6 +25,7 @@ int main( int argc, char* argv[] ) {
 
     run_multiresolution_tests();
     run_numerical_tests();
+    run_radarfunctions_tests();
     run_terralib_math_tests();
 
     std::cout << "Closing Terralib...";

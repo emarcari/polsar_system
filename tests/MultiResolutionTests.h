@@ -1,7 +1,7 @@
 /*!
-  \file math_tests.h
+  \file MultiResolutionTests.h
 
-  \brief Simple code for testing some terralib math features.
+  \brief Simple code for testing Multi Resolution feature.
 
   \author Etore Marcari Jr. <etore@dpi.inpe.br>
 */
