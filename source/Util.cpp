@@ -6,48 +6,55 @@
 // Local
 #include "Util.h"
 
+// Terralib
+#include <rp/Functions.h>
+#include <rp/RasterHandler.h>
+
 namespace polsarsystem {
   namespace util {
+    bool CopyComplex2DiskRaster( const te::rst::Raster& inputRaster,
+				 const std::string& fileName )
+    {
+      if( !( inputRaster.getAccessPolicy() & te::common::RAccess ) ) {
+	return false;
+      };
 
-    std::vector<std::pair<te::rst::Raster*,size_t>>
-    extractRastersFromArgs( int argc, char* argv[] ) {
-      std::vector<std::pair<te::rst::Raster*,size_t>> vec;
+      const unsigned int nBands = inputRaster.getNumberOfBands();
+      const unsigned int nCols = inputRaster.getNumberOfColumns();
+      const unsigned int nRows = inputRaster.getNumberOfRows();
+      unsigned int bandIdx =0;
+      unsigned int col = 0;
+      unsigned int row = 0;
 
-      if( argc < 4 ) {
-	std::cout << "Please check input command line." << std::endl;
-	return vec;
+      std::vector<te::rst::BandProperty*> bandsProperties;
+      for( bandIdx = 0 ; bandIdx < nBands ; ++bandIdx ) {
+	bandsProperties.push_back
+	  ( new te::rst::BandProperty
+	    ( *( inputRaster.getBand( bandIdx )->getProperty() ) ) );
       }
 
-      for( int i = 1; i < ( argc - 1 ); i += 2 ) {
-	std::string rasterName = "NONE";
-	size_t rasterBand = 0;
-	
-	try {
-	  rasterName = argv[i];
-	  rasterBand = fromString<size_t>( argv[i+1] );
-	  
-	  std::map<std::string, std::string> inputRasterInfo;
-	  inputRasterInfo["URI"] = rasterName;
+      te::rp::RasterHandler outRasterHandler;
 
-	  te::rst::Raster*
-	    inputRasterPointer( te::rst::RasterFactory::open( inputRasterInfo ));
+      if( !CreateNewGdalRaster( *( inputRaster.getGrid() ), bandsProperties,
+				fileName, outRasterHandler ) ) {
+	return false;
+      }
 
-	  assert( inputRasterPointer );
+      std::complex<double> value = 0;
 
-	  vec.push_back( std::make_pair<te::rst::Raster*,size_t>( inputRasterPointer,
-								  rasterBand ));
+      for( bandIdx = 0 ; bandIdx < nBands ; ++bandIdx ) {
+	const te::rst::Band& inBand = *inputRaster.getBand( bandIdx );
+	te::rst::Band& outBand = *outRasterHandler.getRasterPtr()->getBand( bandIdx );
 
-	} catch( ... ) {
-	  std::cout << "Error loading input raster file " << rasterName << std::endl;
-	  throw( "Aborting." );
+	for( row = 0 ; row < nRows ; ++row ) {
+	  for( col = 0 ; col < nCols ; ++col ) {
+	    inBand.getValue( col, row, value );
+	    outBand.setValue( col, row, value );
+	  }
 	}
       }
 
-      return vec;
-    }
-
-    std::string extractOutputPrefixFromArgs( int argc, char* argv[] ) {
-      return std::string( argv[argc-1] );
+      return true;
     }
   } // end namespace polsarsystem
 } // end namespace util

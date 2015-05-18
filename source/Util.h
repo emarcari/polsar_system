@@ -21,7 +21,7 @@ namespace polsarsystem {
       \param t What to convert.
 
       \return Converted string.
-     */
+    */
     template<class T>
       std::string toString( const T& t ) {
       std::ostringstream ss;
@@ -34,7 +34,7 @@ namespace polsarsystem {
 
       \param t What to convert.
       \param s Converted string.
-     */
+    */
     template<class T>
       void toString( const T& t, const std::string& s ) {
       t = toString<T>( s );
@@ -46,7 +46,7 @@ namespace polsarsystem {
       \param s String to be converted.
 
       \return Converted value.
-     */
+    */
     template<class T>
       T fromString( const std::string& s ) {
       std::istringstream ss( s );
@@ -60,43 +60,21 @@ namespace polsarsystem {
 
       \param t Converted value.
       \param s String to be converted.
-     */
+    */
     template<class T>
       void fromString( T& t, const std::string& s ) {
       t = fromString<T>( s );
     }
 
     /*!
-      \brief Given an argc/argv pair, it extracts a vector of pairs 
-      <raster*,band_number>.
-
-      \param argc Argc.
-      \param argv Argv.
-
-      \warning The argv must follow the pattern:
-      command line inputFile0 inputBand0 inputFile1 inputBand1 ...
-      inputFileN inputBandN outputPrefix
-      
-      \return A vector of pair<raster*,band_number>.
-     */
-    std::vector<std::pair<te::rst::Raster*,size_t>>
-      extractRastersFromArgs( int argc, char* argv[] );
-
-    /*!
-      \brief Given an argc/argv pair, it extracts the output prefix.
-      The output prefix is used in the output files names creation.
-
-      \param argc Argc.
-      \param argv Argv.
-
-      \warning The argv must follow the pattern:
-      command line inputFile0 inputBand0 inputFile1 inputBand1 ...
-      inputFileN inputBandN outputPrefix
-      
-      \return The output prefix.
-     */
-    std::string extractOutputPrefixFromArgs( int argc, char* argv[] );
-
+      \brief Create a new complex raster into a GDAL datasource.
+      \param rasterGrid The template grid used to create the output raster.
+      \param fileName The output tif file name.
+      \return true if OK, false on errors.
+    */
+    bool CopyComplex2DiskRaster( const te::rst::Raster& inputRaster,
+				 const std::string& fileName );
+    
     
   } // end namespace polsarsystem
 } // end namespace util
