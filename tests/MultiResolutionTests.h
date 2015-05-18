@@ -7,6 +7,7 @@
 */
 
 #include "../source/terralib/MultiResolution.h"
+#include "../source/Util.h"
 
 #include <rp/Functions.h>
 #include <Raster.h>
@@ -118,7 +119,8 @@ void multires_test() {
   assert( nRows == 240 );
 
   // @todo - etore - check against reference images and fix the output directory
-  te::rp::Copy2DiskRaster( *levelRaster, "multires_test_l0.tif" );
+  polsarsystem::util::CopyComplex2DiskRaster( *levelRaster,
+					      "multires_test_l0.tif" );
 
   levelRaster = multiRes->getLevel( 1 );
   nCols = levelRaster->getNumberOfColumns();
@@ -126,7 +128,8 @@ void multires_test() {
   assert( nCols == 120 );
   assert( nRows == 120 );
   
-  te::rp::Copy2DiskRaster( *levelRaster, "multires_test_l1.tif" );
+  polsarsystem::util::CopyComplex2DiskRaster( *levelRaster,
+					      "multires_test_l1.tif" );
 
   levelRaster = multiRes->getLevel( 2 );
   nCols = levelRaster->getNumberOfColumns();
@@ -134,7 +137,8 @@ void multires_test() {
   assert( nCols == 60 );
   assert( nRows == 60 );
   
-  te::rp::Copy2DiskRaster( *levelRaster, "multires_test_l2.tif" );
+  polsarsystem::util::CopyComplex2DiskRaster( *levelRaster,
+					      "multires_test_l2.tif" );
 
   delete levelRaster;
   delete inputRaster;

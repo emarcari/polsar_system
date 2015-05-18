@@ -7,6 +7,7 @@
 */
 
 #include "../source/terralib/RadarFunctions.h"
+#include "../source/Util.h"
 
 #include <Raster.h>
 
@@ -38,7 +39,8 @@ void create_covariance_test() {
   // @todo - etore - insert check of values.
   
   // @todo - etore - check against reference images and fix the output directory
-  te::rp::Copy2DiskRaster( *covMatrixRaster, "cov_matrix_test.tif" );
+  polsarsystem::util::CopyComplex2DiskRaster( *covMatrixRaster,
+					      "cov_matrix_test.tif" );
 
   // @todo - etore - release pointers
   
@@ -64,7 +66,8 @@ void create_intensity_test() {
   
   // @todo - etore - check against reference images
   // and fix the output directory
-  te::rp::Copy2DiskRaster( *intensityRaster, "intensity_test.tif" );
+  polsarsystem::util::CopyComplex2DiskRaster( *intensityRaster,
+					      "intensity_test.tif" );
  
   // @todo - etore - release pointers
   
